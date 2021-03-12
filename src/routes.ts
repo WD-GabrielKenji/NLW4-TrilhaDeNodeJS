@@ -5,6 +5,6 @@ const router = Router();
 
 const userController = new UserController(); // Instaciamos o controller 
 
-router.post("/users", userController.create) // Definimos a rota (/users) com o Controller dos users chamando o método create
+router.post("/users", userController.create); // Definimos a rota (/users) com o Controller dos users chamando o método create
 
-export { router };
+export { router }

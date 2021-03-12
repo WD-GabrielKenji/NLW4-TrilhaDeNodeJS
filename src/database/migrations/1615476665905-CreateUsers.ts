@@ -14,15 +14,15 @@ export class CreateUsers1615476665905 implements MigrationInterface {
                     },
                     { //Coluna do name
                         name: "name",
-                        type: "varchar" // varchar é a string do banco
+                        type: "varchar", // varchar é a string do banco
                         // Valor dele por padrão é que não pode ser nulo
                     },
                     { // Coluna do email
                         name: "email",
-                        type: "varchar"
+                        type: "varchar",
                     },
                     { // Coluna da data
-                        name: "create_at",
+                        name: "created_at",
                         type: "timestamp",
                         default: "now()", // Dando como valor padrão a data de criação
                     }
