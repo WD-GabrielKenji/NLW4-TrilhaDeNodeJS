@@ -1,13 +1,13 @@
 import { Request, Response } from 'express'; // Fazendo os importes de Request e do Response para tipa-los dentro de create
-import { getRepository } from 'typeorm';
-import { User } from '../models/User';
+import { getCustomRepository } from 'typeorm';
+import { UserRepository } from '../repositories/UserRepository';
 
 class UserController {
 
     async create(request: Request, response: Response){
         const {name, email} = request.body; // Corpo da requisição / Desestruturando o body e passando o name e email
 
-        const usersRepository = getRepository(User); // Criando o Repository de User
+        const usersRepository = getCustomRepository(UserRepository); // Repassando o Repository de User
 
         const userAlreadyExists = await usersRepository.findOne({ // Defininfo uma constante para, atraves do findOne() ira trazer somente 1 registro / Basicamente um select no email 
             email
@@ -30,4 +30,4 @@ class UserController {
     }
 }
 
-export { UserController }
+export { UserController };
