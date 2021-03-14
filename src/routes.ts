@@ -9,5 +9,6 @@ const surveysController = new SurveysController(); // Instaciamos o controller d
 
 router.post("/users", userController.create); // Definimos a rota (/users) com o Controller dos users chamando o método create
 router.post("/surveys", surveysController.create); // Definimos a rota (/surveys) com o Controller dos surveys chamando o método create
+router.get("/surveys", surveysController.show); // Definimos a rota que executara a busca dos surveys
 
 export { router }

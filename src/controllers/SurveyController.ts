@@ -18,6 +18,15 @@ class SurveysController {
         
         return response.status(201).json(survey) // Stats Code 201: É o status de criação
     }
+
+    async show(request: Request, response: Response){ // Método que ira listar todas as pesquisas
+        const surveysRepository = getCustomRepository(SurveysRepository); // Passando o repository 
+
+        const all = await surveysRepository.find(); // find é método utilizado para listar todos os registros numa tabela
+
+        return response.json(all); 
+    }
+
 }
 
 export { SurveysController }
