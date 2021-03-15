@@ -26,7 +26,7 @@ class UserController {
           
         await usersRepository.save(user); // Ira salvar o user dentro do Repositorio
 
-        return response.json(user);
+        return response.status(201).json(user);
     }
 }
 
