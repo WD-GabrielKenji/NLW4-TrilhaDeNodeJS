@@ -1,4 +1,7 @@
 import nodemailer, { Transporter } from 'nodemailer';
+import { resolve } from 'path'; // Para conseguir fazer a leitura do caminho dos arquivos
+import handlebars from 'handlebars';
+import fs from 'fs';
 
 class SendMailService {
 
@@ -22,10 +25,21 @@ class SendMailService {
 
     async execute(to: string, subject: string, body: string){ // Método que ira enviar o email
         
+        const npsPath = resolve(__dirname, "..", "views", "emails", "npsMail.hbs") // Variavel do Path (mapeador) / "(__dirname)" ira pegar o diretorio exato da aplicação / (".."(volta dois diretorios), define os diretorios até o arquivo ) Passamo o caminho até o arquivo 
+        const templateFileContent = fs.readFileSync(npsPath).toString("utf8") // Leitura do arquivo (caminho) / (formato)
+
+        const mailTemplateParse = handlebars.compile(templateFileContent); // Passara para o Handlebars o arquivo deseja para compilação
+
+        const html = mailTemplateParse({ // Variavel temporaria, pois logo os dados serão passados para o execute do Service
+            name: to,
+            title: subject,
+            description: body,
+        })
+
         const message = await this.client.sendMail({
             to,
             subject,
-            html: body,
+            html,
             from: "NPS <noreplay@nps.com.br>"
         })
 
