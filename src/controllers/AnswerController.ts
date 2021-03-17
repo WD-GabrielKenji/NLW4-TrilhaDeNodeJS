@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
+import { AppError } from "../errors/AppError";
 import { SurveysUsersRepository } from "../repositories/SurveysUsersRepository";
 
 class AnswerController {
@@ -17,9 +18,7 @@ class AnswerController {
         });
 
         if (!surveyUser) { // Se não existir 
-            return response.status(400).json({
-                error: "Survey User does not exists!"
-            });
+            throw new AppError("Survey User does not exists!") // Sempre quanto tivermos um erro, ela ira criar uma exceção para cima (Jogando a exceção para o Controller -> routes.ts -> app.ts) até chegar no local que queremos tratar
         }
 
         surveyUser.value = Number(value); // Se for ira pegar o "id" e alterar o "value"

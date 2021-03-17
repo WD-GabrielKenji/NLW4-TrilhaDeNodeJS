@@ -5,6 +5,7 @@ import { SurveysUsersRepository } from "../repositories/SurveysUsersRepository";
 import { UserRepository } from "../repositories/UserRepository";
 import SendMailService from "../services/SendMailService";
 import { resolve } from 'path'; // Para conseguir fazer a leitura do caminho dos arquivos
+import { AppError } from "../errors/AppError";
 
 
 class SendMailController {
@@ -22,9 +23,7 @@ class SendMailController {
 
         // Fazendo a verificação se o usuario não(!) existir:
         if(!user) { 
-            return response.status(400).json({
-                error: "User does not exists",
-            });
+            throw new AppError("User does not exists!") // Sempre quanto tivermos um erro, ela ira criar uma exceção para cima (Jogando a exceção para o Controller -> routes.ts -> app.ts) até chegar no local que queremos tratar
         }
 
         // Pegando a informação do id
@@ -32,9 +31,7 @@ class SendMailController {
 
         // Fazendo a verificação se o survey não(!) existir:
         if(!survey){
-            return response.status(400).json({
-                error: "Survey does not exists",
-            });
+            throw new AppError("Survey does not exists!") // Sempre quanto tivermos um erro, ela ira criar uma exceção para cima (Jogando a exceção para o Controller -> routes.ts -> app.ts) até chegar no local que queremos tratar
         }
 
         const npsPath = resolve(__dirname, "..", "views", "emails", "npsMail.hbs") // Variavel do Path (mapeador) / "(__dirname)" ira pegar o diretorio exato da aplicação / (".."(volta dois diretorios), define os diretorios até o arquivo ) Passamo o caminho até o arquivo 
