@@ -60,6 +60,10 @@
 
 <br>
 
+### 🔶<strong>Diagrama:</strong>
+
+![alt](https://github.com/rocketseat-education/nlw-04-nodejs/blob/main/public/diagrama.png?raw=true)
+
 <p align="justify"> Em Construção... </p>
 
 <p align="justify"> </p>
